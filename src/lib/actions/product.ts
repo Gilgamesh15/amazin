@@ -99,6 +99,7 @@ export async function getProductSuggestions() {
     },
   });
 }
+
 export async function createNewProduct(
   name: string,
   images: string[],

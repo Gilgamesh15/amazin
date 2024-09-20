@@ -1,5 +1,10 @@
-import { RatingProps } from "@/lib/types";
 import { Star } from "lucide-react";
+
+export interface RatingProps {
+  rating: number;
+  count: number;
+  maxRating?: number;
+}
 
 export default function Rating({ rating, count, maxRating = 5 }: RatingProps) {
   const filledStars = Math.floor(rating);

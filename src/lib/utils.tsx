@@ -9,8 +9,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaGithub, FaLinkedin, FaSearch } from "react-icons/fa";
 import { TbHeadset, TbTruckDelivery } from "react-icons/tb";
 import { IoHome, IoReader, IoShieldCheckmark } from "react-icons/io5";
-import { ProductCardProps } from "@/components/ProductCard";
 import { ProductSectionProps } from "@/components/ProductSection";
+import { noImageUrl } from "@/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -84,9 +84,9 @@ export function calculateFinalPrice(
 
 export function formatGetTopPriorityCategories(
   data: GetTopPriorityCategoriesReturnType
-): ProductSectionProps {
-  return {
-    products: data.products.map((item) => ({
+): ProductSectionProps[] {
+  return data.map((category) => ({
+    products: category.products.map((item) => ({
       product: {
         id: item.id,
         name: item.name,
@@ -107,16 +107,16 @@ export function formatGetTopPriorityCategories(
       inCart: item.inWishlist.length > 0 ? true : false,
     })),
     categorie: {
-      slug: data.slug,
-      name: data.name,
+      slug: category.slug,
+      name: category.name,
     },
-    ...(data.saleCategory
+    ...(category.saleCategory
       ? {
           sale: {
-            label: data.saleCategory.name,
-            endDate: data.saleCategory.endsAt,
+            label: category.saleCategory.name,
+            endDate: category.saleCategory.endsAt,
           },
         }
       : {}),
-  };
+  }));
 }

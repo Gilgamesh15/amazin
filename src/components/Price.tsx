@@ -1,5 +1,10 @@
-import { PriceProps } from "@/lib/types";
 import { cn, formatPrice } from "@/lib/utils";
+
+export interface PriceProps {
+  priceInCents: number;
+  variant?: "default" | "crossed" | "sale";
+  className?: string;
+}
 
 export default function Price({
   priceInCents,

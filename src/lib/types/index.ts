@@ -33,17 +33,6 @@ import {
   TimeUnitProps,
 } from "./props";
 
-export {
-  type Product,
-  type PriceProps,
-  type RatingProps,
-  type Category,
-  type Sale,
-  type ProductSectionProps,
-  type ToggleItemStatusButtonProps,
-  type CountdownProps,
-  type CountdownRendererProps,
-  type TimeUnitProps,
-};
+export { type GetTopPriorityCategoriesReturnType };
 
 // Core product interface

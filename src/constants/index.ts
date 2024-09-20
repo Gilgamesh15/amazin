@@ -167,4 +167,6 @@ export function formatSenderMail(data: ContactFormValues) {
       `;
 }
 
+export const noImageUrl = "no-image.png";
+
 export { StatCardsData, teamData };

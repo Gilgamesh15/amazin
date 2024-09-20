@@ -1,18 +1,18 @@
-import { getFeatured } from "@/lib/actions";
-
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-export default async function FeaturedSection() {
-  const featured = await getFeatured(5);
-
+export default async function FeaturedSection({
+  featured,
+}: {
+  featured: FeaturedCardProps[];
+}) {
   return (
     <section className="w-full feature-grid">
       {featured.map((promotion, index) => (
-        <PromotionCard
+        <FeaturedCard
           key={promotion.href}
           gridItemName={`feature-grid_item-${index + 1}`}
           image={promotion.image}
@@ -25,7 +25,7 @@ export default async function FeaturedSection() {
   );
 }
 
-export interface PromotionCardProps {
+export interface FeaturedCardProps {
   image: string;
   name: string;
   description: string;
@@ -34,14 +34,14 @@ export interface PromotionCardProps {
   gridItemName: string;
 }
 
-function PromotionCard({
+function FeaturedCard({
   image,
   name,
   description,
   href,
   hrefLabel = "Buy Now",
   gridItemName,
-}: PromotionCardProps) {
+}: FeaturedCardProps) {
   return (
     <div
       className={cn(

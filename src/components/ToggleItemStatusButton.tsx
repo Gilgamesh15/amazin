@@ -10,13 +10,19 @@ import {
   removeProductFromCart,
   removeProductFromWishlist,
 } from "@/lib/actions";
-import { ToggleItemStatusButtonProps } from "@/lib/types";
+
+export interface ToggleItemStatusButtonProps {
+  active?: boolean;
+  type: "cart" | "wishlist";
+  id: string;
+  name: string;
+}
 
 export default function ToggleItemStatusButton({
-  isActive: active = false,
+  active = false,
   type,
-  productId,
-  productName,
+  id,
+  name,
 }: ToggleItemStatusButtonProps) {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
@@ -26,14 +32,10 @@ export default function ToggleItemStatusButton({
     () =>
       type === "cart"
         ? (isActive: boolean) =>
-            isActive
-              ? addProductToCart(productId)
-              : removeProductFromCart(productId)
+            isActive ? addProductToCart(id) : removeProductFromCart(id)
         : (isActive: boolean) =>
-            isActive
-              ? addProductToWishlist(productId)
-              : removeProductFromWishlist(productId),
-    [type, productId]
+            isActive ? addProductToWishlist(id) : removeProductFromWishlist(id),
+    [type, id]
   );
 
   const Icon = type === "cart" ? ShoppingCart : Heart;
@@ -47,12 +49,12 @@ export default function ToggleItemStatusButton({
       toast({
         variant: "default",
         title: isActive ? `Removed from ${type}` : `Added to ${type}`,
-        description: `${productName} has been ${
+        description: `${name} has been ${
           isActive ? "removed from" : "added to"
         } your ${type}.`,
       });
     });
-  }, [isPending, action, isActive, type, productName, toast]);
+  }, [isPending, action, isActive, type, name, toast]);
 
   return (
     <button

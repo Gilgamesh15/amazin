@@ -126,6 +126,7 @@ export async function addProductToWishlist(productId: string) {
     },
   });
 }
+
 export async function removeProductFromWishlist(productId: string) {
   const { id: wishlistId } = await validateWishlist();
   await prisma.wishlistItem.deleteMany({

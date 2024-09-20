@@ -9,13 +9,14 @@ import MobileDrawer from "./MobileDrawer";
 import NavLink from "./NavLink";
 import SearchBar from "./SearchBar";
 import ProfileDropdown from "./ProfileDropdown";
+import { noImageUrl } from "@/constants";
 
 export default async function NavBar() {
-  const suggestions = await getProductSuggestions().then((products) =>
-    products.map((product) => ({
-      id: product.id,
-      name: product.name,
-      image: product.images.length > 0 ? product.images[0] : "/no-image.png",
+  const suggestions = await getProductSuggestions().then((item) =>
+    item.map((item) => ({
+      slug: item.slug,
+      name: item.name,
+      image: item.images.length > 0 ? item.images[0] : noImageUrl,
     }))
   );
 
